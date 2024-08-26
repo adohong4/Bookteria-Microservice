@@ -56,14 +56,7 @@ public class UserService {
         var profileRequest = profileMapper.toProfileCreationRequest(request);
         profileRequest.setUserId(user.getId());
 
-        ServletRequestAttributes servletRequestAttributes =
-                (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-
-        var authHeader = servletRequestAttributes.getRequest().getHeader("Authorization");
-        //check token send profile-service
-        log.info("Header: {}", authHeader);
-
-        profileClient.createProfile(authHeader, profileRequest);
+        profileClient.createProfile( profileRequest);
 
         return userMapper.toUserResponse(user);
     }
